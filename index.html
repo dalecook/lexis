@@ -7,20 +7,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0d0d0d;
-    --surface: #161616;
-    --border: #2a2a2a;
-    --text: #e8e0d0;
-    --text-muted: #5a5a5a;
-    --correct: #4a9c59;
-    --correct-bg: #1a3d22;
-    --present: #b5892a;
-    --present-bg: #3d2e0a;
-    --absent: #2a2a2a;
-    --absent-text: #444;
-    --accent: #c9a84c;
-    --key-bg: #222;
-    --key-text: #ccc;
+    --bg: #f5f0eb;
+    --surface: #ffffff;
+    --border: #d4c9bc;
+    --text: #2c2416;
+    --text-muted: #9e9080;
+    --correct: #1a6fb5;
+    --correct-bg: #d0e8f8;
+    --present: #c0392b;
+    --present-bg: #fad4d0;
+    --absent: #c8c2bc;
+    --absent-text: #7a7065;
+    --accent: #c07c1a;
+    --key-bg: #e8e0d6;
+    --key-text: #2c2416;
     --flip-duration: 0.5s;
     --shake-duration: 0.4s;
     --bounce-duration: 0.08s;
@@ -45,8 +45,8 @@
     position: fixed;
     inset: 0;
     background-image:
-      linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+      linear-gradient(rgba(192,124,26,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(192,124,26,0.05) 1px, transparent 1px);
     background-size: 40px 40px;
     pointer-events: none;
     z-index: 0;
@@ -172,16 +172,16 @@
   .tile.correct {
     background: var(--correct-bg);
     border-color: var(--correct);
-    color: #7dda8b;
+    color: #0d3d6e;
   }
   .tile.present {
     background: var(--present-bg);
     border-color: var(--present);
-    color: #e0b55a;
+    color: #7a1a12;
   }
   .tile.absent {
     background: var(--absent);
-    border-color: #333;
+    border-color: #b0aaa4;
     color: var(--absent-text);
   }
 
@@ -300,24 +300,24 @@
   .key.correct {
     background: var(--correct-bg);
     border-color: var(--correct);
-    color: #7dda8b;
+    color: #0d3d6e;
   }
   .key.present {
     background: var(--present-bg);
     border-color: var(--present);
-    color: #e0b55a;
+    color: #7a1a12;
   }
   .key.absent {
-    background: #111;
-    border-color: #222;
-    color: #333;
+    background: #d4cec8;
+    border-color: #b8b2ac;
+    color: #9a9490;
   }
 
   /* Game over panel */
   #game-over {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.85);
+    background: rgba(245,240,235,0.88);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -335,7 +335,8 @@
 
   .panel {
     background: var(--surface);
-    border: 1px solid var(--accent);
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 40px rgba(44,36,22,0.15);
     padding: 32px 40px;
     text-align: center;
     max-width: 340px;
@@ -433,34 +434,15 @@
     padding: 0 16px 8px;
   }
 
-  .how-toggle {
-    background: none;
-    border: none;
-    color: var(--text-muted);
-    font-family: 'Space Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    cursor: pointer;
-    padding: 6px 0;
-    width: 100%;
-    text-align: center;
-    transition: color 0.15s;
-  }
-
-  .how-toggle:hover { color: var(--accent); }
-
   .how-content {
-    display: none;
-    padding: 12px 0;
+    display: block;
+    padding: 10px 0;
     font-size: 10px;
     color: var(--text-muted);
     letter-spacing: 1px;
     line-height: 1.8;
     text-align: center;
   }
-
-  .how-content.open { display: block; }
 
   .legend {
     display: flex;
@@ -488,9 +470,127 @@
     font-size: 9px;
     font-weight: 700;
   }
-  .legend-box.c { background: var(--correct-bg); border-color: var(--correct); color: #7dda8b; }
-  .legend-box.p { background: var(--present-bg); border-color: var(--present); color: #e0b55a; }
-  .legend-box.a { background: var(--absent); border-color: #333; color: #444; }
+  .legend-box.c { background: #d0e8f8; border-color: #1a6fb5; color: #0d3d6e; }
+  .legend-box.p { background: #fad4d0; border-color: #c0392b; color: #7a1a12; }
+  .legend-box.a { background: #c8c2bc; border-color: #b0aaa4; color: #7a7065; }
+
+  /* New Game button */
+  #new-game-bar {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 500px;
+    padding: 8px 8px 20px;
+  }
+
+  #btn-new-game {
+    width: 100%;
+    height: 48px;
+    background: transparent;
+    border: 1.5px solid var(--accent);
+    color: var(--accent);
+    font-family: "Space Mono", monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.15s, color 0.15s;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  #btn-new-game:hover, #btn-new-game:active {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  /* Confirm dialog */
+  #confirm-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(245,240,235,0.80);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 60;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+
+  #confirm-overlay.show {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  #confirm-box {
+    background: #fff;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 40px rgba(44,36,22,0.15);
+    padding: 28px 32px;
+    text-align: center;
+    width: 88%;
+    max-width: 300px;
+    border-radius: 2px;
+  }
+
+  .confirm-label {
+    font-family: "Playfair Display", serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .confirm-sub {
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+
+  .confirm-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .confirm-cancel, .confirm-ok {
+    flex: 1;
+    height: 40px;
+    font-family: "Space Mono", monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.15s, color 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .confirm-cancel {
+    background: transparent;
+    border: 1.5px solid var(--border);
+    color: var(--text-muted);
+  }
+
+  .confirm-cancel:hover {
+    background: var(--bg);
+  }
+
+  .confirm-ok {
+    background: var(--accent);
+    border: 1.5px solid var(--accent);
+    color: #fff;
+  }
+
+  .confirm-ok:hover {
+    opacity: 0.85;
+  }
 </style>
 </head>
 <body>
@@ -503,10 +603,8 @@
 </header>
 
 <div id="how-to">
-  <button class="how-toggle" onclick="toggleHow()">▾ How to play</button>
-  <div class="how-content" id="how-content">
-    Guess the hidden 5-letter word in 6 tries.<br>
-    Each guess must be a valid English word.
+  <div class="how-content">
+    Guess the hidden 5-letter word in 6 tries. Each guess must be a valid word.
     <div class="legend">
       <div class="legend-item"><div class="legend-box c">W</div> correct spot</div>
       <div class="legend-item"><div class="legend-box p">O</div> wrong spot</div>
@@ -526,6 +624,21 @@
 </div>
 
 <div id="keyboard"></div>
+
+<div id="new-game-bar">
+  <button id="btn-new-game" onclick="confirmNewGame()">New Game</button>
+</div>
+
+<div id="confirm-overlay">
+  <div id="confirm-box">
+    <div class="confirm-label">Start a new game?</div>
+    <div class="confirm-sub">Your current progress will be lost.</div>
+    <div class="confirm-buttons">
+      <button class="confirm-cancel" onclick="closeConfirm()">Cancel</button>
+      <button class="confirm-ok" onclick="confirmYes()">New Game</button>
+    </div>
+  </div>
+</div>
 
 <div id="toast"></div>
 
@@ -556,63 +669,9 @@
 <script>
 // ─── Word Lists ────────────────────────────────────────────────────────────────
 
-const ANSWERS = [
-  // A
-  "abide","abler","abode","abort","abuzz","abyss","acorn","acrid","acted","acumen","adept","adore","adorn","aegis","afoot","agile","aglow","agony","agora","aisle","algae","alibi","aloft","aloof","alpha","altar","amble","amend","amiss","ample","amuse","angel","annex","antic","anvil","aorta","aphid","arbor","ardor","arena","argot","armor","aroma","arson","artsy","ashen","askew","atlas","atone","attic","audio","augur","avert","avian","awe","awful","azure",
-  // B
-  "badge","baker","balmy","banal","barge","baron","basil","baton","bayou","beady","belle","bench","bevel","birch","bland","blare","blaze","bleak","bleat","bliss","bloke","blunt","blurb","blurt","bogus","boney","bongo","bonus","booze","bossy","botch","brace","brash","brawn","breve","briar","brine","brink","brisk","broil","brood","broth","budge","bumpy","burly","burro","buxom",
-  // C
-  "cadet","cairn","cameo","canny","caper","carve","cedar","chafe","chant","chasm","chide","chive","chore","cinch","civic","clack","clang","clank","cleat","cleft","clink","cloak","clout","comet","comic","coral","covet","crave","creak","creed","creep","crimp","croak","croon","crumb","cubic","curly","cutie",
-  // D
-  "dally","datum","daunt","debut","decoy","deity","delta","depot","derby","deter","detox","digit","dingy","disco","dodgy","domed","donor","dowel","downy","draft","drain","drape","drawn","dread","dried","drift","drone","drool","droop","drove","dryer","duvet","dwarf",
-  // E
-  "eager","eclat","edict","eerie","eight","elbow","elite","ember","emote","endow","ensue","envoy","epoch","erode","evade","evict","exalt","exert","extol","exude",
-  // F
-  "fable","facet","faint","faker","farce","fatal","fauna","feast","fecal","feral","fetid","fever","fiber","fiend","fjord","flank","flare","flask","flaunt","fleck","fleek","flesh","flinch","flock","flora","floss","flout","fluke","flume","flunk","foamy","focal","folio","folly","forge","forte","forum","found","frail","freak","friar","fringe","frisk","froth","futon","fuzzy",
-  // G
-  "gaudy","gauze","gavel","gecko","giddy","girth","gizmo","gland","glare","glean","gleam","glint","gloat","gloom","gloss","glove","gnash","golem","gorge","gouge","gourd","greed","grief","grimy","gripe","groan","grope","grout","gruff","guild","guise","gusto","gypsy",
-  // H
-  "haiku","handy","hardy","harsh","haven","hazel","heave","hedge","heist","hence","hippo","hoist","homer","hoppy","horde","human","humor","hydro",
-  // I
-  "icily","ideal","image","inane","inept","inert","indie","infer","ionic","irate","itchy","ivory",
-  // J
-  "jewel","joist","joule","jowly","judge","juice","juicy","jumpy",
-  // K
-  "karma","knave","kneel","knelt","knoll","knack",
-  // L
-  "lance","lapel","lasso","laser","lathe","latte","layer","leach","leaky","ledge","liner","lingo","livid","llama","lodge","logic","lowly","lucid","lumpy","lusty","lyric",
-  // M
-  "magic","major","maker","manly","manor","maple","matey","mayor","media","merit","mirth","miser","model","mogul","moody","moral","moron","mossy","motif","muddy","murky","myrrh",
-  // N
-  "naive","nasty","naval","nerve","newly","night","ninja","noble","nudge","nymph",
-  // O
-  "oaken","octet","oddly","offal","onset","optic","orbit","outdo","ovoid","oxide","ozone",
-  // P
-  "parch","parka","parry","pasta","peeve","penny","perch","peril","petal","petty","phase","photo","piano","pinch","pixel","pixie","plaid","plain","plait","plasm","pleat","pluck","plumb","plume","plump","plunk","point","poppy","porch","posit","pouch","preen","prism","prose","prude","proxy","pulse","purse",
-  // Q
-  "quaff","queen","query","quest","queue","quick","quiet","quota","quote",
-  // R
-  "rabbi","radar","radio","rally","ranch","raspy","ratio","rebut","reedy","refit","reign","relax","remix","renew","repay","repel","reply","resin","retro","risen","risky","rival","rivet","robot","rouge","route","rouse","rowdy","royal","ruins","ruler","rural","rusty",
-  // S
-  "saber","sadly","saint","sauce","satin","savvy","scald","scale","scant","scare","scene","scent","scone","scorn","scout","screw","scrub","seedy","seize","sepia","serum","serve","setup","sever","shade","shady","shake","shame","shark","shawl","sheer","shift","shirk","shrine","shrug","shrub","siege","sigma","silly","sixth","sixty","skill","skull","skunk","slash","slick","slide","slosh","slump","smart","sneak","snowy","solar","sonic","sorry","south","spade","spasm","spate","spawn","speck","spicy","spine","spite","splay","spoil","spoon","sport","spray","sprig","squad","stain","stale","steam","steel","steep","steer","stern","stick","sting","stoic","stoke","stomp","stony","stork","stout","stove","strap","stray","strip","strop","strut","stump","stung","style","suave","sugar","suite","sulky","super","surge","swamp","swear","sweep","sweet","swept","swift","swing","swirl","swoop","sword",
-  // T
-  "taint","tango","tardy","taste","taunt","tawny","tempo","tense","tenth","tepid","theft","theme","thane","thief","thong","tiger","tight","timer","tired","title","today","token","tonal","tonic","topic","torch","torus","touch","tough","toxic","trace","track","trade","trail","train","tramp","trait","trash","tread","treat","trend","trial","trick","tried","troop","trove","truck","truly","trunk","truth","tuber","tumor","tuner","twice","twist","twang","tweed","twerp","tryst",
-  // U
-  "ultra","under","undue","unfit","unify","union","unite","unity","until","usage","utter",
-  // V
-  "vague","valid","valor","value","vapor","vault","venue","venom","verge","vigor","viola","vicar","viral","virus","visor","vista","vital","vivid","vixen","vocal","voice","voter","vodka","vouch","vying",
-  // W
-  "waltz","watch","water","weary","weave","wedge","weird","whale","wheat","where","which","while","white","whole","wider","windy","wispy","witch","world","worry","worst","worth","would","wound","wrath","write","wrote",
-  // Y-Z
-  "yacht","yield","youth","zesty","zilch","zippy",
-  // Common everyday words restored
-  "about","abuse","actor","acute","admit","adopt","adult","after","again","agent","agree","ahead","alarm","album","alert","alien","align","alike","alive","alley","allow","alone","along","aloud","alter","anger","angle","angry","ankle","annoy","apple","apply","apron","argue","arise","arose","array","aside","asked","asset","avoid","awake","award","aware","beach","beard","beast","began","begin","being","belly","below","berry","birth","black","blade","blame","blank","blast","bleed","blend","bless","blind","block","blood","bloom","blown","board","boast","boost","bound","brain","brand","brave","bread","break","breed","brick","bride","brief","bring","broad","broke","brook","brown","brush","buddy","build","built","bulge","bunny","burst","buyer","cabin","candy","cargo","carry","catch","cause","cease","chain","chair","chalk","chaos","charm","chart","chase","cheap","check","chess","chest","chief","child","chill","china","chord","civil","claim","clamp","clash","clasp","class","clerk","click","cliff","climb","cling","clock","clone","close","cloth","cloud","clown","coach","coast","cobra","comma","could","count","cover","craft","crane","crawl","crazy","cream","creek","crime","crisp","cross","crowd","crown","crush","cruel","curve","cycle","daddy","dairy","dance","dated","death","decal","decay","dense","depth","devil","diner","dirty","doubt","dough","douse","dream","dress","drill","drink","drive","drown","dying","early","earth","empty","ended","enemy","enjoy","enter","entry","equip","error","essay","ethos","every","exact","exist","extra","faith","fancy","fault","fence","ferry","fetch","field","fifth","fifty","fight","final","first","fixed","flame","flash","flesh","float","flood","floor","flour","fluid","force","forth","found","frame","frank","fraud","fresh","front","frost","froze","fruit","fully","ghost","giant","given","glass","glide","going","grace","grade","grain","grand","grant","grasp","grass","grave","great","greet","grill","grind","groin","grown","guess","guest","guide","habit","happy","hatch","haste","heart","heavy","herbs","hilly","hinge","honey","honor","horse","hotel","house","hurry","index","inner","input","ivory","japan","joust","knife","knock","known","label","large","later","laugh","learn","leave","legal","lemon","level","light","limit","lingo","loose","lucky","manor","march","match","money","month","mouse","mouth","movie","music","naked","nerve","never","night","noble","noise","north","noted","novel","nurse","offer","often","older","onion","other","outer","owner","paint","party","paste","patch","pause","penal","piece","pilot","place","plain","plant","plate","plaza","plead","polar","polka","polyp","pound","power","press","price","pride","prime","print","prior","prize","probe","prone","proof","proud","prove","pupil","queen","reach","rebel","remit","rapid","range","river","rough","round","ruins","ruler","sadly","saint","sauce","scale","scare","sense","seven","shade","shady","shake","shall","shame","shape","share","sharp","shine","shirt","shock","short","shown","shrug","sight","slope","smell","smile","smoke","solid","solve","space","spark","speak","spend","spill","stack","staff","stage","stand","stare","start","state","stone","stood","store","storm","story","straw","study","stuff","sword","table","taken","teach","teeth","there","think","third","those","three","threw","throw","thumb","touch","tough","trace","trees","truck","truly","trunk","truth","twice","twist","under","unity","until","usage","value","vault","vigor","vital","vocal","voice","voter","watch","water","weary","weave","wedge","weird","whale","wheat","where","which","while","white","whole","wider","witch","world","worry","worst","worth","would","wound","wrath","write","wrote"
-].filter((w,i,a) => w.length === 5 && a.indexOf(w) === i);
+const ANSWERS = ["Nones", "abide", "abode", "abort", "about", "abuse", "aches", "acids", "acorn", "acres", "acrid", "actor", "acute", "adept", "admit", "adopt", "adore", "adorn", "adult", "adzes", "aegis", "afoot", "after", "again", "agars", "ageds", "agent", "agile", "agios", "aglow", "agons", "agony", "agree", "ahead", "aides", "aioli", "aisle", "alarm", "album", "alecs", "alert", "algae", "algas", "alias", "alibi", "alien", "align", "alike", "alive", "alley", "allow", "alods", "aloes", "aloft", "alone", "along", "aloof", "aloud", "alpha", "altar", "alter", "alums", "amaze", "amble", "amend", "amias", "amies", "amirs", "amiss", "amoks", "ample", "amuck", "amuse", "angel", "anger", "angle", "angry", "ankle", "anlas", "annex", "annoy", "anoas", "antes", "antic", "anvil", "aorta", "aphid", "apods", "apple", "apply", "apron", "apses", "arbas", "arbor", "arces", "ardor", "areas", "arena", "argot", "argue", "ariel", "arils", "arise", "arles", "armet", "armor", "aroma", "arose", "array", "arses", "arsis", "arson", "artal", "artel", "artis", "artsy", "ascii", "ashen", "aside", "asked", "askew", "aspen", "aspic", "assay", "asses", "asset", "atlas", "atoms", "atomy", "atone", "atopy", "attic", "audio", "audis", "augur", "avens", "avers", "avert", "avian", "avoid", "awake", "award", "aware", "awful", "axels", "ayahs", "azide", "azure", "backs", "badge", "baker", "bakes", "bales", "balls", "balmy", "banal", "bands", "bangs", "banks", "barbs", "bards", "bares", "barge", "barks", "barns", "baron", "basil", "basks", "basts", "baths", "baton", "bayou", "beach", "beads", "beady", "beaks", "beams", "beans", "beard", "bears", "beast", "beats", "beers", "beets", "began", "begin", "being", "belle", "bells", "belly", "below", "belts", "bench", "bends", "bents", "bergs", "berms", "berry", "bests", "bevel", "bikes", "bills", "binds", "bints", "birch", "birds", "birth", "bites", "blabs", "black", "blade", "blads", "blame", "bland", "blank", "blare", "blast", "blaze", "bleak", "bleat", "bleed", "blend", "bless", "blind", "bliss", "blobs", "block", "blocs", "blogs", "bloke", "blood", "bloom", "blots", "blown", "blows", "blues", "blunt", "blurb", "blurs", "blurt", "board", "boast", "bodes", "bogus", "boils", "bolds", "bolls", "bolts", "bonds", "bones", "bonus", "books", "boons", "boost", "boots", "bores", "bossy", "botch", "bound", "brace", "brads", "brain", "brand", "brans", "brash", "brats", "brave", "brawn", "bread", "break", "breed", "briar", "brick", "bride", "brief", "brigs", "brims", "brine", "bring", "brink", "brios", "brisk", "brits", "broad", "broil", "broke", "brood", "brook", "broth", "brown", "brows", "brush", "buddy", "budge", "build", "built", "bulbs", "bulge", "bulls", "bumps", "bumpy", "bunds", "bungs", "bunks", "bunny", "bunts", "burks", "burls", "burly", "burns", "burps", "burro", "burst", "buses", "busts", "butts", "buxom", "buyer", "cabin", "cadet", "cages", "cairn", "cakes", "calls", "calms", "cameo", "camps", "candy", "canes", "canny", "caper", "capos", "cards", "cares", "cargo", "carks", "carps", "carry", "carts", "carve", "cases", "casks", "casts", "catch", "cause", "caves", "cease", "cedar", "cells", "cents", "ceres", "certs", "chads", "chafe", "chain", "chair", "chalk", "chant", "chaos", "chaps", "charm", "chars", "chart", "chase", "chasm", "chats", "chaws", "cheap", "check", "chess", "chest", "chide", "chief", "child", "chill", "china", "chips", "chits", "chive", "chops", "chord", "chore", "cinch", "civic", "civil", "clack", "claim", "clamp", "clams", "clang", "clank", "claps", "clash", "clasp", "class", "claws", "clays", "cleat", "cleft", "clerk", "click", "cliff", "climb", "cling", "clink", "cloak", "clock", "clogs", "clone", "close", "cloth", "clots", "cloud", "clout", "clown", "clubs", "clues", "coach", "coals", "coast", "coats", "cobra", "codes", "coils", "coins", "colds", "colts", "combs", "comes", "comet", "comic", "comma", "cones", "cooks", "cools", "coops", "copes", "coral", "cords", "cores", "corks", "corns", "corps", "costs", "could", "count", "cover", "covet", "crabs", "craft", "crams", "crane", "craps", "crave", "crawl", "crazy", "creak", "cream", "creed", "creek", "creep", "cress", "crews", "cribs", "crime", "crimp", "crisp", "croak", "crocs", "croon", "crops", "cross", "crowd", "crown", "crows", "cruel", "crumb", "crush", "cubic", "culls", "cunts", "curbs", "cures", "curls", "curly", "curve", "cusps", "cutie", "cycle", "daces", "daddy", "dairy", "dales", "dally", "damps", "dance", "dangs", "dares", "darks", "darns", "darts", "dasks", "dated", "dates", "datum", "daunt", "dawns", "deals", "deans", "death", "debts", "debut", "decal", "decay", "decks", "decoy", "deeds", "deity", "dells", "delta", "dense", "dents", "depot", "depth", "derby", "derps", "desks", "deter", "detox", "devil", "dials", "digit", "dikes", "dills", "diner", "dines", "dingy", "dints", "dirty", "disco", "discs", "disks", "dives", "docks", "dodgy", "doles", "dolls", "dolts", "domed", "domes", "donor", "doors", "dorks", "doses", "dotes", "doubt", "dough", "douse", "doves", "dowel", "downs", "downy", "drabs", "draft", "drags", "drain", "drape", "drawn", "draws", "dread", "dream", "dress", "dried", "drift", "drill", "drink", "drive", "drone", "drool", "droop", "drops", "drove", "drown", "drums", "dryer", "duels", "duffs", "dukes", "dulls", "dumps", "dunes", "dunks", "dupes", "dusts", "duvet", "dwarf", "dying", "eager", "earls", "early", "earns", "earth", "eases", "eclat", "edges", "edict", "edits", "eerie", "eight", "elbow", "elite", "ember", "emits", "emote", "empty", "ended", "endow", "enemy", "enjoy", "ensue", "enter", "entry", "envoy", "epics", "epoch", "equip", "erode", "error", "essay", "ethos", "evade", "evens", "every", "evict", "exact", "exalt", "exams", "exert", "exist", "exits", "extol", "extra", "exude", "fable", "faces", "facet", "facts", "fades", "fails", "faint", "faith", "faker", "fakes", "falls", "fancy", "fangs", "farce", "fares", "farms", "farts", "fasts", "fatal", "fates", "fault", "fauna", "fawns", "fears", "feast", "feats", "fecal", "feeds", "fells", "felts", "fence", "fends", "feral", "ferns", "ferry", "fetch", "fetid", "feuds", "fever", "fiber", "field", "fiend", "fifth", "fifty", "fight", "files", "fills", "films", "final", "finds", "fines", "firms", "first", "fists", "fixed", "fjord", "flags", "flame", "flank", "flaps", "flare", "flash", "flask", "flats", "flaws", "fleas", "fleck", "flesh", "flies", "flips", "float", "flock", "floes", "flogs", "flood", "floor", "flora", "floss", "flour", "flout", "flows", "fluid", "fluke", "flume", "flunk", "foams", "foamy", "focal", "foils", "folds", "folio", "folly", "fonts", "foods", "fools", "foots", "force", "fords", "forge", "forks", "forms", "forte", "forth", "forts", "forum", "found", "foxes", "frail", "frame", "frank", "fraud", "freak", "fresh", "friar", "frisk", "front", "frost", "froth", "froze", "fruit", "fuels", "fulls", "fully", "fumes", "funds", "funks", "furls", "fuses", "futon", "fuzzy", "gains", "gales", "games", "gangs", "gapes", "gases", "gasps", "gates", "gaudy", "gauze", "gavel", "gazes", "gears", "gecko", "genes", "gents", "germs", "ghost", "giant", "giddy", "gifts", "gilds", "gills", "girds", "girls", "girth", "given", "gizmo", "gland", "glare", "glass", "gleam", "glean", "glide", "glint", "gloat", "globs", "gloms", "gloom", "glops", "gloss", "glove", "glows", "glues", "gnash", "goals", "goats", "going", "golds", "golem", "gonks", "goods", "goofs", "goons", "gorge", "gouge", "gourd", "grabs", "grace", "grade", "grads", "grain", "grams", "grand", "grant", "grasp", "grass", "grave", "grays", "great", "greed", "greet", "grids", "grief", "grill", "grimy", "grind", "grins", "gripe", "grips", "grits", "groan", "groin", "grope", "grout", "grown", "grows", "grubs", "gruff", "guess", "guest", "guffs", "guide", "guild", "guise", "gulls", "gulps", "gumps", "gusto", "gusts", "gypsy", "habit", "hacks", "haiku", "hairs", "halls", "halts", "hands", "handy", "hangs", "happy", "hardy", "hares", "harms", "harps", "harsh", "hasps", "haste", "hatch", "hates", "hauls", "haven", "hazel", "heals", "heaps", "hears", "heart", "heats", "heave", "heavy", "hedge", "heeds", "heels", "heist", "hells", "helps", "hemps", "hence", "herbs", "herds", "hikes", "hills", "hilly", "hinds", "hinge", "hints", "hippo", "hires", "hives", "hoist", "holds", "holes", "holts", "homer", "homes", "hones", "honey", "honor", "hoods", "hooks", "hoots", "hopes", "hoppy", "horde", "horns", "horse", "hoses", "hosts", "hotel", "house", "hulks", "hulls", "human", "humor", "humps", "hunks", "hunts", "hurls", "hurry", "hurts", "hydro", "hypes", "icily", "icons", "ideal", "ideas", "image", "inane", "incas", "index", "indie", "inept", "inert", "infer", "inner", "input", "ionic", "irate", "irked", "itchy", "ivory", "jacks", "jails", "japan", "japes", "jeans", "jeers", "jells", "jerks", "jests", "jewel", "jibes", "joins", "joist", "jokes", "jolts", "jones", "joule", "joust", "jowls", "jowly", "judge", "juice", "juicy", "jumps", "jumpy", "junks", "justs", "jutes", "karma", "keels", "keeps", "kelps", "kicks", "kills", "kilns", "kinds", "kings", "kinks", "knack", "knave", "kneel", "knelt", "knife", "knits", "knobs", "knock", "knoll", "knops", "knots", "known", "knows", "label", "lacks", "lakes", "lamps", "lance", "lands", "lanes", "lapel", "lards", "lares", "large", "larks", "laser", "lasks", "lasso", "lasts", "later", "lathe", "laths", "latte", "laugh", "lawns", "layer", "leach", "leaky", "leans", "leaps", "learn", "leave", "ledge", "leeks", "leers", "legal", "lemon", "lends", "level", "lifts", "light", "likes", "limbs", "limit", "liner", "lines", "lingo", "links", "lions", "lists", "livid", "llama", "loads", "loams", "loans", "locks", "lodge", "lofts", "logic", "longs", "looks", "looms", "loons", "loops", "loose", "lopes", "lords", "lores", "lowly", "lucid", "lucks", "lucky", "lumps", "lumpy", "lungs", "lurks", "lusts", "lusty", "lutes", "lyric", "maces", "macks", "magic", "mails", "major", "maker", "makes", "males", "malls", "malts", "manes", "manly", "manor", "maple", "march", "mares", "marks", "marts", "masks", "masts", "match", "mates", "matey", "maths", "mauls", "mayor", "mazes", "meals", "means", "meats", "media", "meets", "melts", "memos", "mends", "menus", "merit", "mikes", "miles", "mills", "minds", "mines", "minks", "mints", "mirth", "miser", "moans", "mocks", "model", "modes", "mogul", "moils", "molds", "moles", "molts", "money", "monks", "month", "moody", "moons", "moors", "mopes", "moral", "mores", "morns", "moron", "mossy", "moths", "motif", "mouse", "mouth", "movie", "mucks", "muddy", "mulls", "mumps", "murks", "murky", "music", "musts", "mutes", "myrrh", "nails", "naive", "naked", "names", "napes", "narks", "nasty", "naval", "nears", "nerve", "nests", "never", "newly", "nicks", "night", "nines", "ninja", "noble", "nodes", "noise", "nomes", "nooks", "noons", "norms", "north", "noted", "notes", "nouns", "novel", "nudge", "nukes", "nulls", "nurse", "nymph", "oaken", "oaths", "octet", "oddly", "offal", "offer", "often", "older", "onion", "onset", "optic", "orbit", "other", "outdo", "outer", "ovoid", "owned", "owner", "oxide", "ozone", "paces", "packs", "pages", "pails", "pains", "paint", "pairs", "pales", "palls", "palms", "panes", "pangs", "parch", "pares", "parka", "parks", "parry", "parts", "party", "pasta", "paste", "pasts", "patch", "paths", "pause", "pawns", "peaks", "peals", "pears", "peels", "peers", "peeve", "penal", "penny", "perch", "peril", "perks", "pests", "petal", "petty", "phase", "photo", "piano", "picks", "piece", "pikes", "piles", "pills", "pilot", "pinch", "pines", "pings", "pinks", "pints", "pipes", "pixel", "pixie", "place", "plaid", "plain", "plait", "plans", "plant", "plasm", "plate", "plays", "plaza", "plead", "pleat", "plots", "plows", "pluck", "plugs", "plumb", "plume", "plump", "plums", "plunk", "poems", "point", "pokes", "polar", "poles", "polka", "polls", "polyp", "ponds", "pools", "poppy", "porch", "pores", "porks", "ports", "posit", "posts", "pouch", "pound", "power", "preen", "press", "price", "pride", "prime", "print", "prior", "prism", "prize", "probe", "procs", "prone", "proof", "prose", "proud", "prove", "proxy", "prude", "pucks", "puffs", "pulls", "pulse", "pumps", "punks", "punts", "pupil", "purls", "purrs", "purse", "quads", "quaff", "quals", "quays", "queen", "query", "quest", "queue", "quick", "quiet", "quips", "quits", "quota", "quote", "rabbi", "races", "racks", "radar", "rades", "radio", "rafts", "raids", "rails", "rains", "rakes", "rally", "ramps", "ranch", "range", "ranks", "rapid", "rares", "rasps", "raspy", "rates", "ratio", "raves", "reach", "reals", "reams", "reaps", "rears", "rebel", "rebut", "reeds", "reedy", "reeks", "reels", "refit", "reign", "relax", "remit", "remix", "rends", "renew", "rents", "repay", "repel", "reply", "resin", "rests", "retro", "rides", "rills", "rinds", "rings", "rinks", "riots", "ripes", "risen", "rises", "risks", "risky", "rival", "river", "rivet", "roads", "roams", "roars", "robot", "rocks", "roils", "roles", "rolls", "romps", "roofs", "rooms", "roots", "ropes", "rouge", "rough", "round", "rouse", "route", "rowdy", "royal", "ruins", "ruler", "rules", "rumps", "runes", "runts", "rural", "ruses", "rusts", "rusty", "saber", "sacks", "sadly", "sails", "saint", "sakes", "sales", "salts", "sands", "satin", "sauce", "saves", "savvy", "scald", "scale", "scams", "scans", "scant", "scare", "scars", "scene", "scent", "scone", "scorn", "scout", "screw", "scrub", "seals", "seams", "seats", "seeds", "seedy", "seers", "seize", "sells", "sends", "sense", "sepia", "serum", "serve", "setup", "seven", "sever", "shade", "shady", "shake", "shall", "shame", "shape", "share", "shark", "sharp", "shawl", "sheer", "shift", "shine", "shins", "ships", "shirk", "shirt", "shock", "short", "shown", "shows", "shrub", "shrug", "shuts", "sides", "siege", "sifts", "sight", "sigma", "signs", "sills", "silly", "silts", "sinks", "sixth", "sixty", "sizes", "skids", "skill", "skims", "skips", "skull", "skunk", "slabs", "slags", "slams", "slaps", "slash", "slats", "sleds", "slick", "slide", "slims", "slips", "slits", "slobs", "slogs", "slope", "slosh", "slots", "slows", "slubs", "slugs", "slump", "smart", "smell", "smile", "smogs", "smoke", "snags", "snaps", "sneak", "snobs", "snows", "snowy", "snubs", "soaks", "socks", "soils", "solar", "solds", "soles", "solid", "solve", "sonic", "sorry", "souls", "soups", "south", "space", "spade", "spark", "spasm", "spate", "spats", "spawn", "speak", "speck", "specs", "spend", "spews", "spicy", "spill", "spine", "spite", "spits", "splay", "spoil", "spoon", "sport", "spots", "spray", "sprig", "spuds", "squad", "stabs", "stack", "staff", "stage", "stags", "stain", "stale", "stand", "stare", "start", "state", "steam", "steel", "steep", "steer", "stems", "steps", "stern", "stick", "sting", "stirs", "stoic", "stoke", "stomp", "stone", "stony", "stood", "store", "stork", "storm", "story", "stout", "stove", "stows", "strap", "straw", "stray", "strip", "strop", "strut", "stubs", "studs", "study", "stuff", "stump", "stung", "style", "suave", "sucks", "sugar", "suite", "sulks", "sulky", "sulls", "sumps", "super", "surfs", "surge", "swabs", "swamp", "swans", "swaps", "swats", "swear", "sweep", "sweet", "swept", "swift", "swigs", "swims", "swing", "swirl", "swoop", "sword", "swore", "table", "tails", "taint", "taken", "tales", "talks", "tamps", "tango", "tanks", "tardy", "tares", "tarts", "tasks", "taste", "taunt", "tawny", "taxes", "teach", "teals", "teams", "tears", "teems", "teens", "teeth", "tells", "tempo", "temps", "tends", "tense", "tenth", "tents", "tepid", "terms", "tests", "thane", "theft", "theme", "there", "thief", "think", "third", "thong", "those", "three", "threw", "throw", "thumb", "ticks", "tides", "tiger", "tight", "tikes", "tiles", "tills", "timer", "tines", "tints", "tired", "title", "toads", "today", "toils", "token", "tolls", "tomes", "tonal", "tones", "tonic", "tools", "toots", "topic", "torch", "tores", "torus", "touch", "tough", "tours", "towns", "toxic", "trace", "track", "trade", "trail", "train", "trait", "tramp", "trash", "tread", "treat", "trees", "trend", "trial", "trick", "tried", "trims", "trips", "troop", "trots", "trove", "truck", "truly", "trunk", "truth", "tryst", "tuber", "tubes", "tulls", "tumor", "tuner", "tunes", "turds", "turks", "turns", "tusks", "twang", "tweed", "twerp", "twice", "twigs", "twins", "twist", "types", "ulnas", "ultra", "under", "undue", "unfit", "unify", "union", "unite", "units", "unity", "until", "urges", "usage", "users", "utter", "vague", "valid", "valor", "value", "vamps", "vanes", "vapor", "vases", "vault", "veers", "veins", "vends", "venom", "vents", "venue", "verbs", "verge", "vests", "vexes", "vibes", "vicar", "vigor", "vines", "viola", "viral", "virus", "visor", "vista", "vital", "vivid", "vixen", "vocal", "vodka", "voice", "voles", "volts", "voter", "votes", "vouch", "vying", "wades", "waifs", "wakes", "wales", "walks", "walls", "waltz", "wands", "wants", "wards", "wares", "warns", "warps", "warts", "wasps", "watch", "water", "waves", "waxes", "weary", "weave", "wedge", "weeds", "weeks", "weird", "wells", "wends", "wests", "whale", "wheat", "where", "which", "while", "white", "whole", "wicks", "wider", "wilds", "wiles", "wills", "winds", "windy", "wines", "wings", "winks", "wipes", "wires", "wisps", "wispy", "witch", "wolfs", "wombs", "wonts", "woods", "wools", "words", "works", "world", "worms", "worry", "worst", "worth", "would", "wound", "wraps", "wrath", "write", "writs", "wrote", "yacht", "yanks", "yards", "yarns", "years", "yells", "yelps", "yield", "yipes", "yokes", "yolks", "yorks", "youth", "zests", "zesty", "zilch", "zippy", "zones", "zooms"].filter((w,i,a) => w.length === 5 && a.indexOf(w) === i);
 
-const VALID_GUESSES = new Set([...ANSWERS,
-  // Extra valid guesses that won't be answers
-  "abash","abate","abbot","abbey","abhor","abide","abler","abode","abort","abuzz","abyss","acorn","acrid","acted","adept","adore","agile","agony","agora","aisle","aloft","aloof","amend","amiss","angel","aorta","arbor","ardor","arena","argot","artsy","ashen","askew","augur","awash","balmy","banal","bevel","birch","blare","bleak","bleat","bliss","bloke","blunt","blurt","boney","bongo","booze","bossy","botch","brawn","breve","briar","brine","brisk","burly","burro","cairn","chasm","chore","cinch","cloak","comet","dodgy","dingy","drool","droop","dried","crimp","croak","eerie","envoy","fauna","fjord","flaunt","fleck","flinch","flock","flora","floss","flout","fluke","flume","flunk","foamy","folio","folly","forte","frail","freak","fringe","frisk","froth","giddy","girth","gizmo","gourd","greed","gripe","gruff","gypsy","haiku","handy","horde","inane","inert","irate","knell","knoll","knack","latte","liner","mirth","miser","mogul","moody","moron","mossy","motif","murky","myrrh","naive","oaken","odder","onset","orbit","ovoid","parch","parka","parry","peeve","petty","pixie","plaid","plait","plasm","pleat","posit","pouch","prude","rabbi","raspy","rebut","reedy","refit","repel","retro","rivet","rowdy","rusty","saber","satin","savvy","scald","scone","scrub","seedy","sepia","shawl","shirk","shrub","siege","slosh","slump","sonic","spade","spasm","spate","speck","spicy","spite","splay","sprig","stoic","stomp","stony","stork","strap","strop","stump","suave","sulky","swine","taint","tardy","tawny","tepid","thane","thief","thong","tonal","tonic","torch","torus","tryst","tuber","twang","tweed","twerp","unfit","unwed","vapid","venom","verge","viola","vicar","vixen","vodka","vomit","vouch","waltz","windy","wispy","yawning","zilch"
-]);
+const VALID_GUESSES = new Set([...ANSWERS]);
 
 
 const WORD_DEFS = {
@@ -672,7 +731,7 @@ function buildGrid() {
 
 // ─── Keyboard ─────────────────────────────────────────────────────────────────
 
-const ROWS = [['Q','W','E','R','T','Y','U','I','O','P'],['A','S','D','F','G','H','J','K','L'],['ENTER','Z','X','C','V','B','N','M','⌫']];
+const ROWS = [['Q','W','E','R','T','Y','U','I','O','P'],['A','S','D','F','G','H','J','K','L'],['⌫','Z','X','C','V','B','N','M','ENTER']];
 
 function buildKeyboard() {
   const kb = document.getElementById('keyboard');
@@ -831,9 +890,24 @@ function toast(msg) {
   toastTimer = setTimeout(() => el.classList.remove('show'), 1800);
 }
 
-function toggleHow() {
-  document.getElementById('how-content').classList.toggle('open');
+
+function confirmNewGame() {
+  document.getElementById('confirm-overlay').classList.add('show');
 }
+
+function closeConfirm() {
+  document.getElementById('confirm-overlay').classList.remove('show');
+}
+
+function confirmYes() {
+  closeConfirm();
+  newGame();
+}
+
+// Close confirm on overlay click
+document.getElementById('confirm-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeConfirm();
+});
 
 // ─── Game over ────────────────────────────────────────────────────────────────
 
