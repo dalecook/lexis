@@ -881,14 +881,16 @@ function score(guess, ans) {
 
 function reveal(result) {
   const row = currentRow;
+  const guessSnapshot = currentGuess; // capture before any async clearing
   result.forEach((state, i) => {
     const tile = tiles[row][i];
     setTimeout(() => {
       tile.classList.add('reveal');
       setTimeout(() => {
+        tile.classList.remove('reveal'); // remove after flip completes
         tile.classList.add(state);
         tile.classList.remove('filled');
-        updateKey(currentGuess[i], state);
+        updateKey(guessSnapshot[i], state);
       }, FLIP_DELAY);
     }, i * TILE_INTERVAL);
   });
