@@ -910,6 +910,7 @@ const WIN_BOUNCE_INTERVAL = 100;  // ms — stagger between winning tile bounces
 // ─── State ─────────────────────────────────────────────────────────────────────
 
 let answer = '', currentRow = 0, currentCol = 0, currentGuess = '', gameOver = false;
+let revealingWord = false;
 let stats = { played: 0, won: 0, streak: 0, distribution: [0,0,0,0,0,0] };
 let tiles = [], keyMap = {};
 
@@ -1161,10 +1162,12 @@ function confirmNewGame() {
 }
 
 function closeConfirm() {
+  if (revealingWord) return; // cannot dismiss once word is revealed
   document.getElementById('confirm-overlay').classList.remove('show');
 }
 
 function confirmYes() {
+  revealingWord = true;
   // Swap confirm dialog content to reveal the word
   document.getElementById('confirm-title').textContent = 'The word was';
   document.getElementById('confirm-sub').innerHTML =
@@ -1174,6 +1177,7 @@ function confirmYes() {
 }
 
 function startNewGame() {
+  revealingWord = false;
   // Reset confirm dialog back to default state for next time
   document.getElementById('confirm-title').textContent = 'Start a new game?';
   document.getElementById('confirm-sub').textContent = 'Your current progress will be lost.';
